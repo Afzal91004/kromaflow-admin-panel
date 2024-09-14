@@ -2,7 +2,7 @@
 import { api } from "@/utils/api";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function Home() {
@@ -10,11 +10,8 @@ export default function Home() {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    fetchWallpapers();
-  }, [page]);
-
-  const fetchWallpapers = async () => {
+  // Memoize the fetchWallpapers function
+  const fetchWallpapers = useCallback(async () => {
     try {
       const response = await api.get("/api/wallpapers", {
         params: { page },
@@ -34,7 +31,11 @@ export default function Home() {
     } catch (error) {
       console.error("Error fetching wallpapers:", error);
     }
-  };
+  }, [page]);
+
+  useEffect(() => {
+    fetchWallpapers();
+  }, [fetchWallpapers]);
 
   const fetchMoreData = () => {
     if (hasMore) {
