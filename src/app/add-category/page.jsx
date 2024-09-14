@@ -11,6 +11,7 @@ function Page() {
     name: "",
     image: "",
   });
+  const [categories, setCategories] = useState([]); // Default to an empty array
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [clearImageTrigger, setClearImageTrigger] = useState(false); // Trigger to clear image
@@ -59,35 +60,39 @@ function Page() {
           Add Wallpaper
         </Link>
       </div>
-      <div className="p-6">
-        <ImageUpload
-          handleGetImageUrl={handleGetImageUrl}
-          clearImage={clearImageTrigger} // Pass the trigger to ImageUpload
-          setClearImageTrigger={setClearImageTrigger} // Reset the trigger
-        />
-        <br />
-        <input
-          type="text"
-          className="mb-4 p-2 rounded border border-[#490a66]"
-          placeholder="Enter category name"
-          value={category.name}
-          onChange={(event) =>
-            setCategory((prevValue) => ({
-              ...prevValue,
-              name: event.target.value,
-            }))
-          }
-        />
-        <br />
-        <button
-          onClick={handleCreateCategory}
-          disabled={isSubmitting}
-          className={`bg-[#490a66] p-2 mb-4 rounded text-white hover:bg-purple-500 ${
-            isSubmitting ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-        >
-          {isSubmitting ? "Creating..." : "Create Category"}
-        </button>
+      <div className="flex justify-center">
+        <div className="p-6 w-96 ">
+          <ImageUpload
+            handleGetImageUrl={handleGetImageUrl}
+            clearImage={clearImageTrigger} // Pass the trigger to ImageUpload
+            setClearImageTrigger={setClearImageTrigger} // Reset the trigger
+          />
+          <br />
+          <input
+            type="text"
+            className="mb-4 p-2 w-full rounded border border-[#490a66]"
+            placeholder="Enter category name"
+            value={category.name}
+            onChange={(event) =>
+              setCategory((prevValue) => ({
+                ...prevValue,
+                name: event.target.value,
+              }))
+            }
+          />
+          <br />
+          <div className="flex justify-center">
+            <button
+              onClick={handleCreateCategory}
+              disabled={isSubmitting}
+              className={`bg-[#490a66] p-2 mb-4 rounded text-white hover:bg-purple-500 ${
+                isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            >
+              {isSubmitting ? "Creating..." : "Create Category"}
+            </button>
+          </div>
+        </div>
       </div>
     </main>
   );

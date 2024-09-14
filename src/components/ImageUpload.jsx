@@ -78,7 +78,7 @@ const ImageUpload = ({
   }, [clearImage, setClearImageTrigger]);
 
   return (
-    <div>
+    <div className="w-full">
       {loading && (
         <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-40 backdrop-blur-sm ">
           <div role="status" className="flex flex-col items-center">

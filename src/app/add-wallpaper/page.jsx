@@ -20,7 +20,8 @@ export default function AddWallpaper() {
     const getAllCategories = async () => {
       try {
         const response = await api.get("/api/categories");
-        setCategories(response?.data?.category);
+        console.log("API Response:", response); // Check response structure
+        setCategories(response?.data?.categories); // Correctly set categories
       } catch (error) {
         console.log("error: ", error);
         toast.error("Failed to load categories");
@@ -73,53 +74,62 @@ export default function AddWallpaper() {
           Add Category
         </Link>
       </div>
-      <div className="p-6">
-        <ImageUpload
-          handleGetImageUrl={handleGetImageUrl}
-          clearImage={clearImageTrigger} // Pass the trigger to ImageUpload
-          setClearImageTrigger={setClearImageTrigger} // Reset the trigger
-        />
-        <br />
-        <input
-          type="text"
-          className="mb-4 p-2 rounded border border-[#490a66]"
-          placeholder="Enter wallpaper name"
-          value={wallpaper.name}
-          onChange={(event) =>
-            setWallpaper((prev) => ({
-              ...prev,
-              name: event.target.value,
-            }))
-          }
-        />
-        <br />
-        <select
-          className="mb-4 p-2 rounded border border-[#490a66] w-full"
-          value={wallpaper.category}
-          onChange={(event) => {
-            setWallpaper((prev) => ({
-              ...prev,
-              category: event.target.value,
-            }));
-          }}
-        >
-          <option value="">Select a category</option>
-          {categories.map((category) => (
-            <option key={category._id} value={category._id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-        <br />
-        <button
-          onClick={handleCreateWallpaper}
-          disabled={isSubmitting}
-          className={`bg-[#490a66] p-2 mb-4 rounded text-white hover:bg-purple-500 ${
-            isSubmitting ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-        >
-          {isSubmitting ? "Creating..." : "Create Wallpaper"}
-        </button>
+      <div className="flex justify-center">
+        <div className="p-6 w-96 ">
+          <ImageUpload
+            handleGetImageUrl={handleGetImageUrl}
+            clearImage={clearImageTrigger} // Pass the trigger to ImageUpload
+            setClearImageTrigger={setClearImageTrigger} // Reset the trigger
+          />
+          <br />
+          <input
+            type="text"
+            className="mb-4 w-full p-2 rounded border border-[#490a66]"
+            placeholder="Enter wallpaper name"
+            value={wallpaper.name}
+            onChange={(event) =>
+              setWallpaper((prev) => ({
+                ...prev,
+                name: event.target.value,
+              }))
+            }
+          />
+          <br />
+          <select
+            className="mb-4 p-2 rounded border border-[#490a66] w-full"
+            value={wallpaper.category}
+            onChange={(event) => {
+              setWallpaper((prev) => ({
+                ...prev,
+                category: event.target.value,
+              }));
+            }}
+          >
+            <option value="">Select a category</option>
+            {categories.length > 0 ? (
+              categories.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.name}
+                </option>
+              ))
+            ) : (
+              <option disabled>No categories available</option>
+            )}
+          </select>
+
+          <br />
+          <div className="flex justify-center">
+            <button
+              onClick={handleCreateWallpaper}
+              disabled={isSubmitting}
+              className={`bg-[#490a66] p-2 mb-4 rounded text-white hover:bg-purple-500 ${
+                isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            >
+              {isSubmitting ? "Creating..." : "Create Wallpaper"}
+            </button>
+          </div>
+        </div>
       </div>
     </main>
   );
