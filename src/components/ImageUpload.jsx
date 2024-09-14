@@ -8,6 +8,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { app } from "@/utils/firebase";
+import Image from "next/image";
 
 const ImageUpload = ({
   handleGetImageUrl,
@@ -108,7 +109,7 @@ const ImageUpload = ({
 
       {selectedFile && (
         <div>
-          <img src={selectedFile} alt={fileName} className="h-40 mt-3" />
+          <Image src={selectedFile} alt={fileName} className="h-40 mt-3" />
         </div>
       )}
     </div>
