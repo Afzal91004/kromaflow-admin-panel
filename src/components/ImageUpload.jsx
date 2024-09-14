@@ -109,7 +109,13 @@ const ImageUpload = ({
 
       {selectedFile && (
         <div>
-          <Image src={selectedFile} alt={fileName} className="h-40 mt-3" />
+          <Image
+            height={300}
+            width={300}
+            src={selectedFile}
+            alt={fileName}
+            className="h-40 mt-3"
+          />
         </div>
       )}
     </div>
