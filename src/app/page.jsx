@@ -52,7 +52,7 @@ export default function Home() {
         <h1 className="text-lg font-semibold content-center">
           Create Wallpaper
         </h1>
-        <div className="py-3">
+        <div className="py-3 flex gap-4">
           <Link
             href={"/add-category"}
             className="hidden md:block border border-l-2 border-b-2 border-t-0 border-r-0 p-3 shadow-md border-purple-700 shadow-purple-500"
