@@ -45,25 +45,42 @@ export default function Home() {
 
   return (
     <main>
-      <div className="py-6 rounded-lg text-white shadow-md bg-[#490a66] flex justify-between px-20">
-        <h1>Logo</h1>
-        <h1 className="text-lg font-semibold">Create Wallpaper</h1>
+      <div className="py-2 rounded-lg text-white shadow-md bg-[#490a66] flex justify-between px-4 md:px-20">
+        <h1 className="content-center">
+          <Link href={"/"}>Logo</Link>
+        </h1>
+        <h1 className="text-lg font-semibold content-center">
+          Create Wallpaper
+        </h1>
         <div className="py-3">
           <Link
             href={"/add-category"}
-            className="border border-l-2 border-b-2 border-t-0 border-r-0 p-3 shadow-md border-purple-700 shadow-purple-500"
+            className="hidden md:block border border-l-2 border-b-2 border-t-0 border-r-0 p-3 shadow-md border-purple-700 shadow-purple-500"
           >
             Add Category
           </Link>
           <Link
             href="/add-wallpaper"
-            className="border border-l-2 border-b-2 border-t-0 border-r-0 p-3 shadow-md border-purple-700 shadow-purple-500"
+            className="hidden md:block border border-l-2 border-b-2 border-t-0 border-r-0 p-3 shadow-md border-purple-700 shadow-purple-500"
           >
             Upload New Wallpaper
           </Link>
         </div>
       </div>
-
+      <div className="py-3 flex justify-center gap-6">
+        <Link
+          href={"/add-category"}
+          className="md:hidden border  p-3 shadow-md border-purple-700 hover:bg-purple-400 shadow-purple-500"
+        >
+          Add Category
+        </Link>
+        <Link
+          href="/add-wallpaper"
+          className="md:hidden border  p-3 shadow-md border-purple-700 shadow-purple-500"
+        >
+          Upload New Wallpaper
+        </Link>
+      </div>
       <div className="p-6 rounded-lg shadow-lg bg-white">
         <InfiniteScroll
           dataLength={wallpapers.length}
